@@ -1,0 +1,92 @@
+{
+  "contract": "JOCKY Agent to Backend API",
+  "version": "0.1",
+  "status": "MVP_CONTRACT_CANDIDATE",
+
+  "transport": {
+    "protocol": "HTTPS",
+    "format": "JSON"
+  },
+
+  "endpoints": {
+    "register_agent": {
+      "method": "POST",
+      "path": "/agents/register",
+      "purpose": "Register the agent with the backend.",
+      "request": {
+        "agent_id": "string",
+        "machine_id": "string",
+        "hostname": "string",
+        "operating_system": "string"
+      },
+      "response": {
+        "agent_id": "string",
+        "status": "string"
+      }
+    },
+
+    "poll_tasks": {
+      "method": "GET",
+      "path": "/tasks/poll?agent_id={agent_id}",
+      "purpose": "Check whether the backend has a task for the agent.",
+      "response": {
+        "task": "Task|null"
+      }
+    },
+
+    "update_task_status": {
+      "method": "POST",
+      "path": "/tasks/{task_id}/status",
+      "purpose": "Report the current execution state of a task.",
+      "request": {
+        "agent_id": "string",
+        "status": "string",
+        "message": "string|null"
+      },
+      "response": {
+        "task_id": "string",
+        "status": "string"
+      }
+    },
+
+    "upload_evidence": {
+      "method": "POST",
+      "path": "/evidence",
+      "purpose": "Send a completed evidence package to the backend.",
+      "request": {
+        "task_id": "string",
+        "agent_id": "string",
+        "evidence": "Evidence"
+      },
+      "response": {
+        "evidence_id": "string",
+        "status": "string"
+      }
+    }
+  },
+
+  "task_status": [
+    "QUEUED",
+    "SENT",
+    "RUNNING",
+    "COMPLETED",
+    "FAILED",
+    "PARTIAL",
+    "TIMEOUT",
+    "CANCELLED"
+  ],
+
+  "rules": {
+    "agent_must_register_before_polling": true,
+    "agent_id_must_be_present_on_agent_requests": true,
+    "evidence_must_match_evidence_contract": true,
+    "backend_verifies_evidence_sha256": true,
+    "invalid_requests_return_api_error": true
+  },
+
+  "failure_handling": {
+    "backend_unavailable": "Agent retries and reports a waiting/offline state.",
+    "evidence_upload_failure": "Evidence remains available for retry and is not silently discarded.",
+    "invalid_task": "Agent rejects the task and reports failure."
+  }
+}

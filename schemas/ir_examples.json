@@ -1,0 +1,229 @@
+{
+  "contract": "JOCKY Forensic IR Examples",
+  "version": "0.1",
+  "status": "MVP_REFERENCE_EXAMPLES",
+  "purpose": "Reference JSON examples for the JOCKY Forensic IR contract.",
+
+  "examples": {
+    "investigation_begin": {
+      "op": "INVESTIGATION_BEGIN",
+      "params": {
+        "title": "Endpoint Triage"
+      },
+      "investigation_id": "inv-001",
+      "ir_version": "0.1",
+      "target_scope": "machine-001",
+      "timeout_ms": 5000
+    },
+
+    "collect_system_info": {
+      "op": "COLLECT_SYSTEM_INFO",
+      "params": {},
+      "investigation_id": "inv-001",
+      "ir_version": "0.1",
+      "target_scope": "machine-001",
+      "timeout_ms": 5000
+    },
+
+    "collect_processes": {
+      "op": "COLLECT_PROCESSES",
+      "params": {},
+      "investigation_id": "inv-001",
+      "ir_version": "0.1",
+      "target_scope": "machine-001",
+      "timeout_ms": 5000
+    },
+
+    "filter_processes": {
+      "op": "FILTER_PROCESSES",
+      "params": {
+        "source_id": "processes",
+        "condition": {
+          "type": "comparison",
+          "field": "memory",
+          "operator": ">",
+          "value": 500
+        }
+      },
+      "investigation_id": "inv-001",
+      "ir_version": "0.1",
+      "target_scope": "machine-001",
+      "timeout_ms": 5000
+    },
+
+    "filter_processes_complex": {
+      "op": "FILTER_PROCESSES",
+      "params": {
+        "source_id": "processes",
+        "condition": {
+          "type": "logical",
+          "operator": "and",
+          "left": {
+            "type": "comparison",
+            "field": "name",
+            "operator": "==",
+            "value": "powershell.exe"
+          },
+          "right": {
+            "type": "comparison",
+            "field": "memory",
+            "operator": ">",
+            "value": 500
+          }
+        }
+      },
+      "investigation_id": "inv-001",
+      "ir_version": "0.1",
+      "target_scope": "machine-001",
+      "timeout_ms": 5000
+    },
+
+    "collect_network_connections": {
+      "op": "COLLECT_NETWORK_CONNECTIONS",
+      "params": {},
+      "investigation_id": "inv-001",
+      "ir_version": "0.1",
+      "target_scope": "machine-001",
+      "timeout_ms": 5000
+    },
+
+    "collect_network_listeners": {
+      "op": "COLLECT_NETWORK_LISTENERS",
+      "params": {},
+      "investigation_id": "inv-001",
+      "ir_version": "0.1",
+      "target_scope": "machine-001",
+      "timeout_ms": 5000
+    },
+
+    "preserve_process_evidence": {
+      "op": "PRESERVE_EVIDENCE",
+      "params": {
+        "source_id": "suspicious",
+        "category": "process"
+      },
+      "investigation_id": "inv-001",
+      "ir_version": "0.1",
+      "target_scope": "machine-001",
+      "timeout_ms": 5000
+    },
+
+    "preserve_system_evidence": {
+      "op": "PRESERVE_EVIDENCE",
+      "params": {
+        "source_id": "sys",
+        "category": "system"
+      },
+      "investigation_id": "inv-001",
+      "ir_version": "0.1",
+      "target_scope": "machine-001",
+      "timeout_ms": 5000
+    },
+
+    "verify_evidence": {
+      "op": "VERIFY_EVIDENCE",
+      "params": {
+        "evidence_reference": "process_evidence"
+      },
+      "investigation_id": "inv-001",
+      "ir_version": "0.1",
+      "target_scope": "machine-001",
+      "timeout_ms": 5000
+    },
+
+    "investigation_end": {
+      "op": "INVESTIGATION_END",
+      "params": {},
+      "investigation_id": "inv-001",
+      "ir_version": "0.1",
+      "target_scope": "machine-001",
+      "timeout_ms": 5000
+    }
+  },
+
+  "complete_example": {
+    "investigation_id": "inv-001",
+    "ir_version": "0.1",
+    "instructions": [
+      {
+        "op": "INVESTIGATION_BEGIN",
+        "params": {
+          "title": "Endpoint Triage"
+        },
+        "investigation_id": "inv-001",
+        "ir_version": "0.1",
+        "target_scope": "machine-001",
+        "timeout_ms": 5000
+      },
+      {
+        "op": "COLLECT_SYSTEM_INFO",
+        "params": {},
+        "investigation_id": "inv-001",
+        "ir_version": "0.1",
+        "target_scope": "machine-001",
+        "timeout_ms": 5000
+      },
+      {
+        "op": "COLLECT_PROCESSES",
+        "params": {},
+        "investigation_id": "inv-001",
+        "ir_version": "0.1",
+        "target_scope": "machine-001",
+        "timeout_ms": 5000
+      },
+      {
+        "op": "FILTER_PROCESSES",
+        "params": {
+          "source_id": "processes",
+          "condition": {
+            "type": "comparison",
+            "field": "memory",
+            "operator": ">",
+            "value": 500
+          }
+        },
+        "investigation_id": "inv-001",
+        "ir_version": "0.1",
+        "target_scope": "machine-001",
+        "timeout_ms": 5000
+      },
+      {
+        "op": "PRESERVE_EVIDENCE",
+        "params": {
+          "source_id": "suspicious",
+          "category": "process"
+        },
+        "investigation_id": "inv-001",
+        "ir_version": "0.1",
+        "target_scope": "machine-001",
+        "timeout_ms": 5000
+      },
+      {
+        "op": "VERIFY_EVIDENCE",
+        "params": {
+          "evidence_reference": "process_evidence"
+        },
+        "investigation_id": "inv-001",
+        "ir_version": "0.1",
+        "target_scope": "machine-001",
+        "timeout_ms": 5000
+      },
+      {
+        "op": "INVESTIGATION_END",
+        "params": {},
+        "investigation_id": "inv-001",
+        "ir_version": "0.1",
+        "target_scope": "machine-001",
+        "timeout_ms": 5000
+      }
+    ]
+  },
+
+  "notes": [
+    "These examples are reference payloads and do not replace the IR contract.",
+    "target_scope is currently represented as a string because its exact MVP semantics are still a Day 3 decision.",
+    "source_id and evidence_reference are shown using the current proposed result-reference model.",
+    "The complete example demonstrates ordering and instruction relationships.",
+    "Implementation must follow the versioned IR contract rather than inventing additional operations."
+  ]
+}

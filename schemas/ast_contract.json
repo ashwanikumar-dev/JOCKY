@@ -1,0 +1,296 @@
+{
+  "contract": "JOCKY AST Contract",
+  "version": "0.1",
+  "status": "MVP_CONTRACT_CANDIDATE",
+  "owner": "M1",
+  "description": "Machine-readable contract defining the Abstract Syntax Tree produced by the JOCKY parser from Grammar v0.1 source programs.",
+  "source_language": "JOCKY",
+  "source_grammar_version": "0.1",
+
+  "pipeline_position": {
+    "input": "JOCKY Source",
+    "producer": "Parser",
+    "output": "AST",
+    "consumer": "Semantic Analysis",
+    "next_stage": "Forensic IR Generation"
+  },
+
+  "design_rules": [
+    "AST represents syntactic structure only.",
+    "AST must not perform semantic validation.",
+    "AST must not generate Forensic IR.",
+    "AST must preserve source positions for diagnostics.",
+    "AST must be JSON-serializable.",
+    "AST node structure must remain aligned with Grammar v0.1.",
+    "Domain operation validity is checked during semantic analysis, not parsing."
+  ],
+
+  "root": {
+    "node_type": "Program",
+    "grammar_rule": "Program := InvestigationBlock",
+    "children": ["Investigation"]
+  },
+
+  "nodes": {
+    "Investigation": {
+      "node_type": "Investigation",
+      "grammar_rule": "InvestigationBlock",
+      "fields": {
+        "name": {
+          "type": "Literal",
+          "literal_type": "String"
+        },
+        "statements": {
+          "type": "array",
+          "items": "Statement"
+        },
+        "span": {
+          "type": "SourceSpan"
+        }
+      }
+    },
+
+    "Assignment": {
+      "node_type": "Assignment",
+      "grammar_rule": "Assignment",
+      "fields": {
+        "identifier": {
+          "type": "Identifier"
+        },
+        "type_annotation": {
+          "type": "Identifier",
+          "optional": true
+        },
+        "expression": {
+          "type": "Expression"
+        },
+        "span": {
+          "type": "SourceSpan"
+        }
+      }
+    },
+
+    "ExpressionStatement": {
+      "node_type": "ExpressionStatement",
+      "grammar_rule": "ExpressionStatement",
+      "fields": {
+        "expression": {
+          "type": "Expression"
+        },
+        "span": {
+          "type": "SourceSpan"
+        }
+      }
+    },
+
+    "Identifier": {
+      "node_type": "Identifier",
+      "grammar_rule": "Identifier",
+      "fields": {
+        "name": {
+          "type": "string"
+        },
+        "span": {
+          "type": "SourceSpan"
+        }
+      }
+    },
+
+    "Literal": {
+      "node_type": "Literal",
+      "grammar_rule": "Literal",
+      "fields": {
+        "literal_type": {
+          "type": "enum",
+          "values": ["String", "Integer", "Float", "Boolean", "ByteSize"]
+        },
+        "value": {
+          "type": "primitive"
+        },
+        "raw": {
+          "type": "string"
+        },
+        "span": {
+          "type": "SourceSpan"
+        }
+      }
+    },
+
+    "Call": {
+      "node_type": "Call",
+      "grammar_rule": "Postfix / Arguments",
+      "fields": {
+        "receiver": {
+          "type": "Identifier"
+        },
+        "method": {
+          "type": "Identifier"
+        },
+        "arguments": {
+          "type": "array",
+          "items": "Expression"
+        },
+        "span": {
+          "type": "SourceSpan"
+        }
+      }
+    },
+
+    "Filter": {
+      "node_type": "Filter",
+      "grammar_rule": "Postfix",
+      "fields": {
+        "receiver": {
+          "type": "Expression"
+        },
+        "method": {
+          "type": "Identifier",
+          "expected_value": "filter"
+        },
+        "condition": {
+          "type": "Expression"
+        },
+        "span": {
+          "type": "SourceSpan"
+        }
+      }
+    },
+
+    "Comparison": {
+      "node_type": "Comparison",
+      "grammar_rule": "ComparisonExpr",
+      "fields": {
+        "left": {
+          "type": "Expression"
+        },
+        "operator": {
+          "type": "enum",
+          "values": ["==", "!=", ">", "<", ">=", "<="]
+        },
+        "right": {
+          "type": "Expression"
+        },
+        "span": {
+          "type": "SourceSpan"
+        }
+      }
+    },
+
+    "LogicalOp": {
+      "node_type": "LogicalOp",
+      "grammar_rule": "LogicalOrExpr / LogicalAndExpr",
+      "fields": {
+        "operator": {
+          "type": "enum",
+          "values": ["and", "or"]
+        },
+        "left": {
+          "type": "Expression"
+        },
+        "right": {
+          "type": "Expression"
+        },
+        "span": {
+          "type": "SourceSpan"
+        }
+      }
+    },
+
+    "Not": {
+      "node_type": "Not",
+      "grammar_rule": "NotExpr",
+      "fields": {
+        "expression": {
+          "type": "Expression"
+        },
+        "span": {
+          "type": "SourceSpan"
+        }
+      }
+    }
+  },
+
+  "type_aliases": {
+    "Statement": ["Assignment", "ExpressionStatement"],
+    "Expression": [
+      "Identifier",
+      "Literal",
+      "Call",
+      "Filter",
+      "Comparison",
+      "LogicalOp",
+      "Not"
+    ]
+  },
+
+  "source_span": {
+    "type": "SourceSpan",
+    "fields": {
+      "start_line": "integer",
+      "start_column": "integer",
+      "end_line": "integer",
+      "end_column": "integer"
+    }
+  },
+
+  "ast_to_semantic_boundary": {
+    "parser_responsibilities": [
+      "Validate syntax",
+      "Build AST",
+      "Preserve source structure",
+      "Preserve source positions"
+    ],
+    "semantic_responsibilities": [
+      "Resolve identifiers",
+      "Resolve modules and operations",
+      "Validate function existence",
+      "Validate argument types",
+      "Validate filter fields",
+      "Validate filter value types",
+      "Validate operation allowlist",
+      "Validate policy constraints"
+    ]
+  },
+
+  "ast_to_ir_mapping": {
+    "Investigation": ["INVESTIGATION_BEGIN", "INVESTIGATION_END"],
+    "System.info": "COLLECT_SYSTEM_INFO",
+    "Process.collect": "COLLECT_PROCESSES",
+    "Process.filter": "FILTER_PROCESSES",
+    "Network.connections": "COLLECT_NETWORK_CONNECTIONS",
+    "Network.listeners": "COLLECT_NETWORK_LISTENERS",
+    "Evidence.preserve": "PRESERVE_EVIDENCE",
+    "Evidence.verify": "VERIFY_EVIDENCE"
+  },
+
+  "important_ir_boundary_rules": [
+    "AST does not contain final Forensic IR parameter encoding.",
+    "Semantic analysis resolves whether a parsed operation is valid.",
+    "IR generation converts validated AST semantics into the frozen IR instruction vocabulary.",
+    "Filter expressions are transformed into the IR condition tree during IR generation.",
+    "ByteSize literals may retain their lexical/unit representation in AST and are normalized during semantic analysis or IR generation.",
+    "Instruction result references such as source_id remain dependent on the corresponding IR contract decision."
+  ],
+
+  "versioning": {
+    "current_version": "0.1",
+    "breaking_changes": [
+      "Changing node types",
+      "Removing required node fields",
+      "Changing field meaning",
+      "Changing grammar-to-AST structural mapping"
+    ],
+    "non_breaking_changes": [
+      "Additional optional metadata",
+      "Additional source-location metadata",
+      "Clarifying documentation"
+    ]
+  },
+
+  "status_notes": [
+    "This contract is aligned with Grammar v0.1.",
+    "Final Rust struct representation is owned by M3.",
+    "IR-specific open decisions must not be silently frozen inside the AST contract.",
+    "The AST contract must be reviewed by M1 and M3 before implementation is considered frozen."
+  ]
+}

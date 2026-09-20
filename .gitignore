@@ -1,0 +1,130 @@
+# ==============================
+# Operating System
+# ==============================
+
+.DS_Store
+Thumbs.db
+desktop.ini
+
+
+# ==============================
+# IDE / Editors
+# ==============================
+
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+.idea/
+*.swp
+*.swo
+
+
+# ==============================
+# Environment / Secrets
+# ==============================
+
+.env
+.env.*
+!.env.example
+
+*.pem
+*.key
+*.crt
+
+
+# ==============================
+# Logs
+# ==============================
+
+*.log
+logs/
+tmp/
+temp/
+
+
+# ==============================
+# Build / Generated Files
+# ==============================
+
+dist/
+build/
+target/
+out/
+
+.cache/
+coverage/
+
+
+# ==============================
+# Rust
+# ==============================
+
+**/target/
+Cargo.lock
+
+
+# ==============================
+# Python
+# ==============================
+
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+.venv/
+venv/
+env/
+
+
+# ==============================
+# Node / Frontend
+# ==============================
+
+node_modules/
+.next/
+.nuxt/
+.vite/
+*.tsbuildinfo
+
+
+# ==============================
+# Database / Local Data
+# ==============================
+
+*.db
+*.sqlite
+*.sqlite3
+
+data/local/
+storage/local/
+
+
+# ==============================
+# Test Artifacts
+# ==============================
+
+test-results/
+playwright-report/
+reports/generated/
+
+
+# ==============================
+# JOCKY Local Development
+# ==============================
+
+.local/
+.dev/
+.jocky/
+jocky-local/
+
+
+# ==============================
+# OS / Editor Backup Files
+# ==============================
+
+*~
+*.bak
+*.tmp

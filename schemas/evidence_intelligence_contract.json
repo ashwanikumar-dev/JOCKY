@@ -1,0 +1,79 @@
+{
+  "contract": "JOCKY Evidence Intelligence Contract",
+  "version": "0.1",
+  "status": "MVP_CONTRACT_CANDIDATE",
+
+  "detection": {
+    "input": "Evidence",
+    "output": "Finding",
+
+    "rules": [
+      "unusual_process_behavior",
+      "unusual_resource_consumption",
+      "suspicious_network_characteristics",
+      "process_network_relationship",
+      "unusual_service",
+      "suspicious_file_metadata"
+    ],
+
+    "finding": {
+      "finding_id": "string",
+      "investigation_id": "string",
+      "rule_id": "string",
+      "evidence_ids": "array[string]",
+      "description": "string",
+      "severity": "string",
+      "risk_score": "number",
+      "created_at": "Timestamp"
+    }
+  },
+
+  "alerts": {
+    "input": "Finding",
+    "output": "Alert",
+
+    "alert": {
+      "alert_id": "string",
+      "finding_id": "string",
+      "investigation_id": "string",
+      "severity": "string",
+      "risk_score": "number",
+      "created_at": "Timestamp"
+    },
+
+    "rule": "A Finding becomes an Alert when its risk score crosses the configured alert threshold."
+  },
+
+  "timeline": {
+    "input": "Evidence",
+    "output": "TimelineEvent",
+
+    "event": {
+      "event_id": "string",
+      "investigation_id": "string",
+      "evidence_id": "string",
+      "timestamp": "Timestamp",
+      "machine_id": "string",
+      "hostname": "string",
+      "operating_system": "string",
+      "event_type": "string",
+      "source": "string"
+    },
+
+    "processing": ["timestamp_normalization", "ordering", "correlation"],
+
+    "timestamp_standard": "UTC"
+  },
+
+  "relationships": {
+    "finding_to_evidence": "Every Finding must reference one or more evidence_ids.",
+    "timeline_event_to_evidence": "Every TimelineEvent must reference an evidence_id.",
+    "alert_to_finding": "Every Alert must reference a Finding.",
+    "correlation": "Correlation may link multiple TimelineEvents from the same or different machines."
+  },
+
+  "error_handling": {
+    "detection_rule_error": "Log the rule error and continue evaluating other rules.",
+    "invalid_timestamp": "Flag the event and exclude it from ordered timeline output."
+  }
+}

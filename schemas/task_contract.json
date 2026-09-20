@@ -1,0 +1,187 @@
+{
+  "contract": "JOCKY Agent Task Contract",
+  "version": "0.1",
+  "status": "MVP_CONTRACT_CANDIDATE",
+  "owner": "M3/M5",
+  "consumer": "M4",
+
+  "description": "Contract defining the task envelope used by the backend to dispatch validated Forensic IR to a specific JOCKY Agent.",
+
+  "purpose": [
+    "Bind a validated IR sequence to a specific target agent.",
+    "Provide task lifecycle tracking.",
+    "Allow the Agent to retrieve and execute the assigned IR.",
+    "Maintain investigation and machine attribution."
+  ],
+
+  "schema": {
+    "task_id": {
+      "type": "string",
+      "required": true,
+      "description": "Unique identifier for the task."
+    },
+
+    "investigation_id": {
+      "type": "string",
+      "required": true,
+      "description": "Identifier linking the task to an investigation."
+    },
+
+    "agent_id": {
+      "type": "string",
+      "required": true,
+      "description": "Identifier of the target JOCKY Agent."
+    },
+
+    "ir": {
+      "type": "array",
+      "required": true,
+      "items": "ForensicIRInstruction",
+      "description": "Validated Forensic IR instruction sequence."
+    },
+
+    "status": {
+      "type": "enum",
+      "required": true,
+      "values": [
+        "QUEUED",
+        "SENT",
+        "RUNNING",
+        "COMPLETED",
+        "FAILED",
+        "PARTIAL",
+        "TIMEOUT",
+        "CANCELLED"
+      ]
+    },
+
+    "created_at": {
+      "type": "Timestamp",
+      "required": true
+    }
+  },
+
+  "ir_requirements": [
+    "IR must conform to Forensic IR Contract v0.1.",
+    "IR must be validated before task creation.",
+    "Agent must locally re-validate the received IR.",
+    "Task must not contain arbitrary native commands.",
+    "Task must target a registered agent."
+  ],
+
+  "lifecycle": {
+    "normal": ["QUEUED", "SENT", "RUNNING", "COMPLETED"],
+
+    "failure_paths": [
+      "QUEUED -> FAILED",
+      "SENT -> FAILED",
+      "RUNNING -> FAILED",
+      "RUNNING -> PARTIAL",
+      "SENT -> TIMEOUT",
+      "RUNNING -> TIMEOUT",
+      "QUEUED -> CANCELLED",
+      "SENT -> CANCELLED",
+      "RUNNING -> CANCELLED"
+    ]
+  },
+
+  "ownership": {
+    "task_creation": "M5 Backend",
+    "task_storage": "M5 Backend",
+    "task_dispatch": "M5 Backend",
+    "task_polling": "M4 Agent",
+    "task_execution": "M4 Agent",
+    "runtime_execution": "M3 Runtime/Dispatcher running inside Agent",
+    "status_reporting": "M4 Agent -> M5 Backend"
+  },
+
+  "execution_model": {
+    "control_plane": {
+      "direction": "Backend -> Agent",
+      "payload": "Agent Task containing validated IR",
+      "purpose": "Tell the target machine what authorized forensic operations to perform."
+    },
+
+    "data_plane": {
+      "direction": "Agent -> Backend",
+      "payload": "Evidence and execution status",
+      "purpose": "Return collected forensic results and task outcomes."
+    }
+  },
+
+  "multi_machine_model": {
+    "description": "One investigation may generate separate tasks for multiple registered agents.",
+    "rule": "Each task is bound to exactly one agent_id.",
+    "example": {
+      "investigation_id": "inv_001",
+      "tasks": [
+        {
+          "task_id": "task_win01",
+          "agent_id": "agent_win01"
+        },
+        {
+          "task_id": "task_ubuntu01",
+          "agent_id": "agent_ubuntu01"
+        }
+      ]
+    }
+  },
+
+  "agent_acceptance_rules": [
+    "Reject unknown task schema versions.",
+    "Reject tasks addressed to an unknown agent.",
+    "Reject malformed IR.",
+    "Reject unsupported IR versions.",
+    "Reject unknown IR operations.",
+    "Reject invalid instruction parameters.",
+    "Record task rejection in the agent audit log."
+  ],
+
+  "backend_rules": [
+    "Only validated IR may be placed inside a task.",
+    "task_id must be unique.",
+    "agent_id must reference a registered agent.",
+    "investigation_id must reference the corresponding investigation.",
+    "Task status transitions must be auditable.",
+    "Task creation timestamp must be recorded."
+  ],
+
+  "api_relationship": {
+    "create_task": "Backend creates task after investigation compilation/validation.",
+    "poll_task": "Agent requests pending task assigned to its agent_id.",
+    "status_update": "Agent reports task lifecycle state.",
+    "evidence_upload": "Agent uploads resulting evidence separately through the Evidence contract."
+  },
+
+  "audit_requirements": [
+    "task_id",
+    "investigation_id",
+    "agent_id",
+    "status",
+    "timestamp",
+    "event"
+  ],
+
+  "versioning": {
+    "current_version": "0.1",
+    "breaking_change_requires_version_bump": true,
+    "breaking_changes": [
+      "Removing a required field",
+      "Renaming a required field",
+      "Changing field meaning",
+      "Changing task lifecycle semantics",
+      "Changing the IR embedding model"
+    ],
+    "non_breaking_changes": [
+      "Adding optional metadata",
+      "Adding optional audit information"
+    ]
+  },
+
+  "status_notes": [
+    "This contract follows the MVP task shape defined by the 14-Day execution plan.",
+    "The task contains validated IR rather than arbitrary commands.",
+    "Evidence is uploaded through the separate Evidence contract.",
+    "Detailed authentication and transport mechanisms belong to the Agent/Backend communication design, not this task schema."
+  ]
+}

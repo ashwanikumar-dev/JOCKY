@@ -1,0 +1,69 @@
+{
+  "contract": "JOCKY Evidence Contract",
+  "version": "0.1",
+  "status": "MVP_CONTRACT_CANDIDATE",
+
+  "evidence": {
+    "evidence_id": "string",
+    "investigation_id": "string",
+    "machine_id": "string",
+    "hostname": "string",
+    "operating_system": "string",
+    "agent_id": "string",
+
+    "evidence_type": "string",
+
+    "collector": "string",
+    "collector_version": "string",
+    "collection_time": "Timestamp",
+
+    "raw_data": "object",
+    "normalized_data": "object",
+
+    "metadata": "object",
+
+    "hash": {
+      "algorithm": "SHA-256",
+      "value": "string"
+    },
+
+    "status": "string",
+
+    "storage_reference": "string"
+  },
+
+  "status_values": ["collected", "uploaded", "verified", "integrity_failed"],
+
+  "requirements": {
+    "raw_data_must_be_preserved": true,
+    "normalized_data_is_derived_from_raw_data": true,
+    "provenance_is_required": true,
+    "sha256_is_required": true,
+    "machine_identity_must_be_preserved": true
+  },
+
+  "provenance": {
+    "required_fields": [
+      "investigation_id",
+      "machine_id",
+      "hostname",
+      "operating_system",
+      "agent_id",
+      "collector",
+      "collector_version",
+      "collection_time"
+    ]
+  },
+
+  "integrity": {
+    "algorithm": "SHA-256",
+    "hash_input": "raw_data",
+    "verification_required": true,
+    "mismatch_status": "integrity_failed"
+  },
+
+  "raw_vs_normalized": {
+    "raw_data": "Original collector output. Must not be discarded.",
+    "normalized_data": "Common representation used for cross-platform analysis."
+  }
+}

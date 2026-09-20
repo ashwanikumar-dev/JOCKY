@@ -1,0 +1,266 @@
+{
+  "contract": "JOCKY Forensic IR Contract",
+  "version": "0.1",
+  "status": "WORKING_CONTRACT",
+  "owner": "M3",
+  "consumer": "M4",
+  "description": "Versioned, controlled Intermediate Representation generated from semantically validated JOCKY programs.",
+
+  "design_principles": [
+    "IR is a controlled representation of forensic intent.",
+    "IR contains only allowlisted JOCKY operations.",
+    "IR must not contain arbitrary OS commands or arbitrary executable code.",
+    "IR is JSON-serializable.",
+    "IR is versioned.",
+    "IR is validated before execution.",
+    "Agents must locally re-validate received IR."
+  ],
+
+  "instruction_count": 9,
+
+  "allowed_operations": [
+    "INVESTIGATION_BEGIN",
+    "COLLECT_SYSTEM_INFO",
+    "COLLECT_PROCESSES",
+    "FILTER_PROCESSES",
+    "COLLECT_NETWORK_CONNECTIONS",
+    "COLLECT_NETWORK_LISTENERS",
+    "PRESERVE_EVIDENCE",
+    "VERIFY_EVIDENCE",
+    "INVESTIGATION_END"
+  ],
+
+  "instruction_envelope": {
+    "required_fields": {
+      "op": "string",
+      "params": "object",
+      "investigation_id": "string",
+      "ir_version": "string"
+    },
+    "proposed_fields": {
+      "target_scope": "string",
+      "timeout_ms": "integer"
+    }
+  },
+
+  "frozen_fields": ["op", "investigation_id", "ir_version"],
+
+  "open_fields": ["target_scope", "timeout_ms"],
+
+  "instructions": {
+    "INVESTIGATION_BEGIN": {
+      "params": {
+        "title": {
+          "type": "string",
+          "required": false,
+          "status": "PROPOSED"
+        }
+      },
+      "position": "first",
+      "consumer": "Runtime/Dispatcher",
+      "collector_required": false
+    },
+
+    "COLLECT_SYSTEM_INFO": {
+      "params": {},
+      "status": "CONFIRMED",
+      "maps_from": "System.info()",
+      "consumer": "Runtime/Dispatcher -> System Collector",
+      "collector_required": true
+    },
+
+    "COLLECT_PROCESSES": {
+      "params": {},
+      "status": "CONFIRMED",
+      "maps_from": "Process.collect()",
+      "consumer": "Runtime/Dispatcher -> Process Collector",
+      "collector_required": true
+    },
+
+    "FILTER_PROCESSES": {
+      "params": {
+        "source_id": {
+          "type": "string",
+          "required": true,
+          "status": "PROPOSED"
+        },
+        "condition": {
+          "type": "FilterCondition",
+          "required": true,
+          "status": "PROPOSED"
+        }
+      },
+      "maps_from": "Process.filter(condition)",
+      "consumer": "Runtime/Dispatcher",
+      "collector_required": false,
+      "execution_model": "in_process"
+    },
+
+    "COLLECT_NETWORK_CONNECTIONS": {
+      "params": {},
+      "status": "CONFIRMED",
+      "maps_from": "Network.connections()",
+      "consumer": "Runtime/Dispatcher -> Network Collector",
+      "collector_required": true
+    },
+
+    "COLLECT_NETWORK_LISTENERS": {
+      "params": {},
+      "status": "CONFIRMED",
+      "maps_from": "Network.listeners()",
+      "consumer": "Runtime/Dispatcher -> Network Collector",
+      "collector_required": true
+    },
+
+    "PRESERVE_EVIDENCE": {
+      "params": {
+        "source_id": {
+          "type": "string",
+          "required": true,
+          "status": "PROPOSED"
+        },
+        "category": {
+          "type": "enum",
+          "values": ["system", "process", "network"],
+          "required": true,
+          "status": "PROPOSED"
+        }
+      },
+      "maps_from": "Evidence.preserve(source)",
+      "consumer": "Agent Evidence Packaging -> Backend /evidence",
+      "collector_required": false,
+      "output": "Evidence"
+    },
+
+    "VERIFY_EVIDENCE": {
+      "params": {
+        "status": "DECISION_REQUIRED",
+        "proposed": {
+          "evidence_reference": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "maps_from": "Evidence.verify(evidence)",
+      "consumer": "DECISION_REQUIRED",
+      "status": "NOT_FROZEN"
+    },
+
+    "INVESTIGATION_END": {
+      "params": {},
+      "status": "CONFIRMED",
+      "position": "last",
+      "consumer": "Runtime/Dispatcher",
+      "collector_required": false
+    }
+  },
+
+  "filter_condition": {
+    "status": "PROPOSED",
+    "allowed_nodes": ["comparison", "logical"],
+    "comparison": {
+      "fields": ["op", "field", "value", "value_type"],
+      "operators": ["==", "!=", ">", "<", ">=", "<="]
+    },
+    "logical": {
+      "operators": ["and", "or"],
+      "fields": ["op", "left", "right"]
+    },
+    "allowed_value_types": ["String", "Integer", "Float", "Boolean", "ByteSize"]
+  },
+
+  "execution_rules": {
+    "sequence_rules": [
+      "Every IR sequence must begin with INVESTIGATION_BEGIN.",
+      "Every IR sequence must end with INVESTIGATION_END.",
+      "Instruction order must be preserved.",
+      "Referenced source results must originate from earlier instructions."
+    ],
+    "validation_rules": [
+      "Reject unknown operation names.",
+      "Reject unsupported ir_version values.",
+      "Reject malformed instruction envelopes.",
+      "Reject invalid parameter shapes.",
+      "Reject malformed filter condition trees.",
+      "Reject invalid instruction ordering.",
+      "Reject invalid source references.",
+      "Reject arbitrary command execution instructions."
+    ]
+  },
+
+  "pipeline": {
+    "source": "JOCKY Source",
+    "lexer": "Tokens",
+    "parser": "AST",
+    "semantic_analysis": "Validated AST",
+    "ir_generator": "Forensic IR",
+    "ir_validator": "Validated Forensic IR",
+    "task": "Agent Task",
+    "runtime": "Runtime/Dispatcher",
+    "collector": "OS-specific Collector"
+  },
+
+  "ast_mapping": {
+    "Investigation": ["INVESTIGATION_BEGIN", "INVESTIGATION_END"],
+    "System.info": "COLLECT_SYSTEM_INFO",
+    "Process.collect": "COLLECT_PROCESSES",
+    "Process.filter": "FILTER_PROCESSES",
+    "Network.connections": "COLLECT_NETWORK_CONNECTIONS",
+    "Network.listeners": "COLLECT_NETWORK_LISTENERS",
+    "Evidence.preserve": "PRESERVE_EVIDENCE",
+    "Evidence.verify": "VERIFY_EVIDENCE"
+  },
+
+  "versioning": {
+    "current_version": "0.1",
+    "optional_fields_may_be_added_before_day_4": true,
+    "breaking_change_requires_version_bump": true,
+    "breaking_changes": [
+      "Changing an operation name",
+      "Removing a required field",
+      "Renaming a required field",
+      "Changing the meaning of an existing field",
+      "Changing the instruction envelope structure"
+    ],
+    "change_approval": {
+      "producer": "M3",
+      "consumer": "M4",
+      "grammar_facing_changes": "M1"
+    }
+  },
+
+  "open_decisions": [
+    {
+      "id": "IR-DEC-001",
+      "topic": "target_scope",
+      "status": "DECISION_REQUIRED",
+      "owners": ["M1", "M3"]
+    },
+    {
+      "id": "IR-DEC-002",
+      "topic": "instruction_result_reference",
+      "status": "DECISION_REQUIRED",
+      "proposed_mechanism": "source_id/result_id matching JOCKY variable names",
+      "owners": ["M1", "M3"]
+    },
+    {
+      "id": "IR-DEC-003",
+      "topic": "VERIFY_EVIDENCE execution ownership",
+      "status": "DECISION_REQUIRED",
+      "owners": ["M1", "M3", "M5"]
+    },
+    {
+      "id": "IR-DEC-004",
+      "topic": "PRESERVE_EVIDENCE category",
+      "status": "PROPOSED",
+      "owners": ["M1", "M3", "M5"]
+    },
+    {
+      "id": "IR-DEC-005",
+      "topic": "INVESTIGATION_BEGIN title",
+      "status": "PROPOSED",
+      "owners": ["M1", "M3"]
+    }
+  ]
+}

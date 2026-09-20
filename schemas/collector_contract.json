@@ -1,0 +1,180 @@
+{
+  "contract": "JOCKY Collector Interface Contract",
+  "version": "0.1",
+  "status": "MVP_CONTRACT_CANDIDATE",
+  "owner": "M4",
+  "consumers": ["runtime", "agent", "evidence", "backend"],
+
+  "purpose": "Define the common interface that every OS-specific forensic collector must implement.",
+
+  "design_principles": [
+    "Collectors acquire authorized forensic data from the local operating system.",
+    "Collectors are read-only with respect to the collected system state.",
+    "Collectors must not execute arbitrary commands or unrestricted operations.",
+    "OS-specific acquisition details remain inside the collector implementation.",
+    "Collector output must be compatible with the JOCKY Evidence model.",
+    "Raw evidence must be preserved before or alongside normalization.",
+    "Normalization produces a common representation without removing source provenance."
+  ],
+
+  "interface": {
+    "validate": {
+      "purpose": "Validate whether the collector can perform the requested collection operation on the current endpoint.",
+      "input": {
+        "operation": "string",
+        "parameters": "object"
+      },
+      "output": {
+        "valid": "boolean",
+        "errors": "array"
+      }
+    },
+
+    "collect": {
+      "purpose": "Acquire the requested forensic data from the local operating system.",
+      "input": {
+        "operation": "string",
+        "parameters": "object"
+      },
+      "output": {
+        "status": "string",
+        "raw_data": "object",
+        "metadata": "object",
+        "error": "object|null"
+      }
+    },
+
+    "normalize": {
+      "purpose": "Convert raw collector output into the JOCKY common evidence representation while preserving provenance.",
+      "input": {
+        "raw_data": "object",
+        "metadata": "object"
+      },
+      "output": {
+        "normalized_data": "object",
+        "provenance": "object"
+      }
+    }
+  },
+
+  "supported_os": ["windows", "ubuntu_linux"],
+
+  "supported_categories": ["system", "process", "network"],
+
+  "mvp_implementations": [
+    {
+      "os": "windows",
+      "category": "system"
+    },
+    {
+      "os": "windows",
+      "category": "process"
+    },
+    {
+      "os": "windows",
+      "category": "network"
+    },
+    {
+      "os": "ubuntu_linux",
+      "category": "system"
+    },
+    {
+      "os": "ubuntu_linux",
+      "category": "process"
+    },
+    {
+      "os": "ubuntu_linux",
+      "category": "network"
+    }
+  ],
+
+  "collector_rules": {
+    "read_only": true,
+    "authorized_operations_only": true,
+    "arbitrary_command_execution": false,
+    "unrestricted_filesystem_access": false,
+    "unrestricted_network_operations": false,
+    "os_specific_commands_in_jocky": false
+  },
+
+  "output_requirements": {
+    "raw_data_required": true,
+    "normalized_data_required": true,
+    "provenance_required": true,
+    "evidence_compatible": true
+  },
+
+  "provenance": {
+    "required_fields": [
+      "evidence_id",
+      "investigation_id",
+      "machine_id",
+      "hostname",
+      "operating_system",
+      "agent_id",
+      "collector",
+      "collector_version",
+      "collected_at",
+      "status"
+    ]
+  },
+
+  "evidence_relationship": {
+    "collector_output": "raw_evidence",
+    "normalization_output": "normalized_evidence",
+    "preservation": "raw_evidence_must_not_be_discarded",
+    "integrity": "sha256_is_attached_to_the_evidence_object"
+  },
+
+  "unsupported_operation_behavior": {
+    "direct_os_equivalent_missing": "return a structured unsupported-operation result",
+    "silent_fallback": false,
+    "arbitrary_fallback_execution": false
+  },
+
+  "error_model": {
+    "categories": [
+      "unsupported_operation",
+      "invalid_parameters",
+      "permission_error",
+      "collection_error",
+      "normalization_error",
+      "platform_error"
+    ],
+    "errors_must_be_structured": true,
+    "errors_must_be_auditable": true
+  },
+
+  "runtime_relationship": {
+    "flow": [
+      "Forensic_IR",
+      "Runtime",
+      "Dispatcher",
+      "Collector",
+      "Operating_System",
+      "Raw_Evidence",
+      "Normalization",
+      "Evidence"
+    ],
+    "collector_selection": "Runtime/Dispatcher selects the appropriate OS-specific collector for the validated IR operation.",
+    "filter_behavior": "FILTER_PROCESSES is handled by the runtime and does not invoke a collector."
+  },
+
+  "cross_platform_model": {
+    "principle": "Same forensic intent may map to different OS-specific collectors.",
+    "example": {
+      "jocky_operation": "Process.collect()",
+      "forensic_ir": "COLLECT_PROCESSES",
+      "windows": "WindowsProcessCollector",
+      "ubuntu_linux": "LinuxProcessCollector"
+    },
+    "common_model": "Collectors may acquire OS-specific data but normalize supported common fields into the JOCKY evidence model.",
+    "native_data_preservation": true
+  },
+
+  "versioning": {
+    "contract_version": "0.1",
+    "breaking_changes_require_version_bump": true,
+    "producer_consumer_agreement_required": true
+  }
+}

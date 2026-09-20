@@ -1,0 +1,79 @@
+{
+  "contract": "JOCKY Backend to Dashboard API",
+  "version": "0.1",
+  "status": "MVP_CONTRACT_CANDIDATE",
+
+  "transport": {
+    "protocol": "HTTPS",
+    "format": "JSON"
+  },
+
+  "endpoints": {
+    "create_investigation": {
+      "method": "POST",
+      "path": "/investigations",
+      "purpose": "Create a new investigation.",
+      "request": {
+        "script": "string",
+        "target_machines": "array[string]"
+      },
+      "response": {
+        "investigation_id": "string"
+      }
+    },
+
+    "get_investigation": {
+      "method": "GET",
+      "path": "/investigations/{id}",
+      "purpose": "Get the current state of an investigation.",
+      "response": {
+        "investigation_id": "string",
+        "status": "string"
+      }
+    },
+
+    "get_machines": {
+      "method": "GET",
+      "path": "/machines",
+      "purpose": "List registered machines and their current agent state.",
+      "response": {
+        "machines": "array"
+      }
+    },
+
+    "get_findings": {
+      "method": "GET",
+      "path": "/findings?investigation_id={investigation_id}",
+      "purpose": "Return findings generated from evidence for an investigation.",
+      "response": {
+        "findings": "array"
+      }
+    },
+
+    "get_timeline": {
+      "method": "GET",
+      "path": "/timeline?investigation_id={investigation_id}",
+      "purpose": "Return the investigation timeline.",
+      "response": {
+        "events": "array"
+      }
+    },
+
+    "get_audit": {
+      "method": "GET",
+      "path": "/audit?investigation_id={investigation_id}",
+      "purpose": "Return the audit and custody events for an investigation.",
+      "response": {
+        "events": "array"
+      }
+    }
+  },
+
+  "rules": {
+    "responses_are_json": true,
+    "investigation_data_is_scoped_by_id": true,
+    "findings_are_linked_to_evidence": true,
+    "timeline_events_are_linked_to_evidence": true,
+    "audit_events_are_append_only": true
+  }
+}
