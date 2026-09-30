@@ -1,0 +1,16 @@
+{
+  "name": "jocky-dashboard-backend",
+  "version": "1.0.0",
+  "description": "JOCKY Dashboard Backend Service — Handbook-driven API layer for the SIH Forensic Console",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node src/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}

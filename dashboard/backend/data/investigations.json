@@ -1,0 +1,3874 @@
+[
+  {
+    "investigation_id": "inv-1790536572335",
+    "id": "inv-1790536572335",
+    "m5_investigation_id": 41,
+    "task_id": "68",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "COMPLETED",
+    "last_compiled": "2026-09-27T19:16:13.895Z",
+    "lastCompiled": "2026-09-27T19:16:13.895Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T19:16:13.895Z",
+    "created": "28 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790536572335",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790536572335",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790536572335",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790536261384",
+    "id": "inv-1790536261384",
+    "m5_investigation_id": 40,
+    "task_id": "67",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "COMPLETED",
+    "last_compiled": "2026-09-27T19:11:03.558Z",
+    "lastCompiled": "2026-09-27T19:11:03.558Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T19:11:03.558Z",
+    "created": "28 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790536261384",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790536261384",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790536261384",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790533436265",
+    "id": "inv-1790533436265",
+    "m5_investigation_id": 39,
+    "task_id": "66",
+    "title": "Final Detection Test",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "COMPLETED",
+    "last_compiled": "2026-09-27T18:24:00.206Z",
+    "lastCompiled": "2026-09-27T18:24:00.206Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T18:24:00.206Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Final Detection Test\" {\n    sys = System.info()\n    processes = Process.collect()\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(processes)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790533436265",
+      "investigation_name": "Final Detection Test",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790533436265",
+            "investigation_name": "Final Detection Test",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790533436265",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790533087340",
+    "id": "inv-1790533087340",
+    "m5_investigation_id": 38,
+    "task_id": "65",
+    "title": "Final E2E Test",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "COMPLETED",
+    "last_compiled": "2026-09-27T18:19:06.702Z",
+    "lastCompiled": "2026-09-27T18:19:06.702Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T18:19:06.702Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Final E2E Test\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790533087340",
+      "investigation_name": "Final E2E Test",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790533087340",
+            "investigation_name": "Final E2E Test",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790533087340",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790531623274",
+    "id": "inv-1790531623274",
+    "m5_investigation_id": 37,
+    "task_id": "64",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "COMPLETED",
+    "last_compiled": "2026-09-27T17:53:44.503Z",
+    "lastCompiled": "2026-09-27T17:53:44.503Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T17:53:44.503Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790531623274",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790531623274",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790531623274",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790516831886",
+    "id": "inv-1790516831886",
+    "m5_investigation_id": 36,
+    "task_id": "63",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "COMPLETED",
+    "last_compiled": "2026-09-27T13:47:13.047Z",
+    "lastCompiled": "2026-09-27T13:47:13.047Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T13:47:13.047Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790516831886",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790516831886",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790516831886",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790516793328",
+    "id": "inv-1790516793328",
+    "m5_investigation_id": 35,
+    "task_id": "62",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "COMPLETED",
+    "last_compiled": "2026-09-27T13:46:34.499Z",
+    "lastCompiled": "2026-09-27T13:46:34.499Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T13:46:34.499Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790516793328",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790516793328",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790516793328",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790516639827",
+    "id": "inv-1790516639827",
+    "m5_investigation_id": 34,
+    "task_id": "61",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "COMPLETED",
+    "last_compiled": "2026-09-27T13:44:01.445Z",
+    "lastCompiled": "2026-09-27T13:44:01.445Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T13:44:01.445Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790516639827",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790516639827",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790516639827",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790516166541",
+    "id": "inv-1790516166541",
+    "m5_investigation_id": 33,
+    "task_id": "60",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "COMPLETED",
+    "last_compiled": "2026-09-27T13:36:07.921Z",
+    "lastCompiled": "2026-09-27T13:36:07.921Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T13:36:07.921Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790516166541",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790516166541",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790516166541",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790516058159",
+    "id": "inv-1790516058159",
+    "m5_investigation_id": 32,
+    "task_id": "59",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "COMPLETED",
+    "last_compiled": "2026-09-27T13:34:19.352Z",
+    "lastCompiled": "2026-09-27T13:34:19.352Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T13:34:19.352Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790516058159",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790516058159",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790516058159",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790516037863",
+    "id": "inv-1790516037863",
+    "m5_investigation_id": 31,
+    "task_id": "58",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "COMPLETED",
+    "last_compiled": "2026-09-27T13:33:59.262Z",
+    "lastCompiled": "2026-09-27T13:33:59.262Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T13:33:59.262Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790516037863",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790516037863",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790516037863",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790515994058",
+    "id": "inv-1790515994058",
+    "m5_investigation_id": 30,
+    "task_id": "57",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "COMPLETED",
+    "last_compiled": "2026-09-27T13:33:15.325Z",
+    "lastCompiled": "2026-09-27T13:33:15.325Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T13:33:15.325Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790515994058",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790515994058",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790515994058",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790515723738",
+    "id": "inv-1790515723738",
+    "m5_investigation_id": 29,
+    "task_id": "56",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "COMPLETED",
+    "last_compiled": "2026-09-27T13:28:45.274Z",
+    "lastCompiled": "2026-09-27T13:28:45.274Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T13:28:45.274Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790515723738",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790515723738",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790515723738",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790503198560",
+    "id": "inv-1790503198560",
+    "m5_investigation_id": 28,
+    "task_id": "55",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "COMPLETED",
+    "last_compiled": "2026-09-27T09:59:59.857Z",
+    "lastCompiled": "2026-09-27T09:59:59.857Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T09:59:59.857Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790503198560",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790503198560",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790503198560",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790503143525",
+    "id": "inv-1790503143525",
+    "m5_investigation_id": 27,
+    "task_id": "54",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "COMPLETED",
+    "last_compiled": "2026-09-27T09:59:05.036Z",
+    "lastCompiled": "2026-09-27T09:59:05.036Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T09:59:05.036Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790503143525",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790503143525",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790503143525",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790503112890",
+    "id": "inv-1790503112890",
+    "m5_investigation_id": 26,
+    "task_id": "53",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "COMPLETED",
+    "last_compiled": "2026-09-27T09:58:34.344Z",
+    "lastCompiled": "2026-09-27T09:58:34.344Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T09:58:34.344Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790503112890",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790503112890",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790503112890",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790502743950",
+    "id": "inv-1790502743950",
+    "m5_investigation_id": 25,
+    "task_id": "52",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "COMPLETED",
+    "last_compiled": "2026-09-27T09:52:25.577Z",
+    "lastCompiled": "2026-09-27T09:52:25.577Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T09:52:25.577Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790502743950",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790502743950",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790502743950",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790502520238",
+    "id": "inv-1790502520238",
+    "m5_investigation_id": 24,
+    "task_id": "51",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "COMPLETED",
+    "last_compiled": "2026-09-27T09:48:41.776Z",
+    "lastCompiled": "2026-09-27T09:48:41.776Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T09:48:41.776Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790502520238",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790502520238",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790502520238",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790502213507",
+    "id": "inv-1790502213507",
+    "m5_investigation_id": 23,
+    "task_id": "50",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "COMPLETED",
+    "last_compiled": "2026-09-27T09:43:34.808Z",
+    "lastCompiled": "2026-09-27T09:43:34.808Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T09:43:34.808Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790502213507",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790502213507",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790502213507",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790502151175",
+    "id": "inv-1790502151175",
+    "m5_investigation_id": 22,
+    "task_id": "49",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "COMPLETED",
+    "last_compiled": "2026-09-27T09:42:33.325Z",
+    "lastCompiled": "2026-09-27T09:42:33.325Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T09:42:33.325Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790502151175",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790502151175",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790502151175",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790501913473",
+    "id": "inv-1790501913473",
+    "m5_investigation_id": 21,
+    "task_id": "48",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "COMPLETED",
+    "last_compiled": "2026-09-27T09:38:38.407Z",
+    "lastCompiled": "2026-09-27T09:38:38.407Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T09:38:38.407Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790501913473",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790501913473",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790501913473",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790501095526",
+    "id": "inv-1790501095526",
+    "m5_investigation_id": 20,
+    "task_id": "47",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "COMPLETED",
+    "last_compiled": "2026-09-27T09:24:56.956Z",
+    "lastCompiled": "2026-09-27T09:24:56.956Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T09:24:56.956Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790501095526",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790501095526",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790501095526",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790501060614",
+    "id": "inv-1790501060614",
+    "m5_investigation_id": 19,
+    "task_id": "46",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "COMPLETED",
+    "last_compiled": "2026-09-27T09:24:23.107Z",
+    "lastCompiled": "2026-09-27T09:24:23.107Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T09:24:23.107Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790501060614",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790501060614",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790501060614",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790500859600",
+    "id": "inv-1790500859600",
+    "m5_investigation_id": 18,
+    "task_id": "45",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "COMPLETED",
+    "last_compiled": "2026-09-27T09:21:01.075Z",
+    "lastCompiled": "2026-09-27T09:21:01.075Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T09:21:01.075Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790500859600",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790500859600",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790500859600",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790500735840",
+    "id": "inv-1790500735840",
+    "m5_investigation_id": 17,
+    "task_id": "44",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "COMPLETED",
+    "last_compiled": "2026-09-27T09:18:57.406Z",
+    "lastCompiled": "2026-09-27T09:18:57.406Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T09:18:57.406Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790500735840",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790500735840",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790500735840",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790500700901",
+    "id": "inv-1790500700901",
+    "m5_investigation_id": 16,
+    "task_id": "43",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "RUNNING",
+    "last_compiled": "2026-09-27T09:18:25.311Z",
+    "lastCompiled": "2026-09-27T09:18:25.311Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T09:18:25.311Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790500700901",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790500700901",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790500700901",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790500390400",
+    "id": "inv-1790500390400",
+    "m5_investigation_id": 15,
+    "task_id": "42",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "RUNNING",
+    "last_compiled": "2026-09-27T09:13:12.874Z",
+    "lastCompiled": "2026-09-27T09:13:12.874Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T09:13:12.873Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790500390400",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790500390400",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790500390400",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790496445520",
+    "id": "inv-1790496445520",
+    "m5_investigation_id": 14,
+    "task_id": "41",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "RUNNING",
+    "last_compiled": "2026-09-27T08:07:27.319Z",
+    "lastCompiled": "2026-09-27T08:07:27.319Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T08:07:27.319Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790496445520",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790496445520",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790496445520",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790495639984",
+    "id": "inv-1790495639984",
+    "m5_investigation_id": 13,
+    "task_id": "40",
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "RUNNING",
+    "last_compiled": "2026-09-27T07:54:01.754Z",
+    "lastCompiled": "2026-09-27T07:54:01.754Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T07:54:01.754Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790495639984",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790495639984",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790495639984",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790490810248",
+    "id": "inv-1790490810248",
+    "m5_investigation_id": 12,
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "READY",
+    "last_compiled": "2026-09-27T06:33:32.309Z",
+    "lastCompiled": "2026-09-27T06:33:32.309Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T06:33:32.309Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790490810248",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790490810248",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790490810248",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790490737846",
+    "id": "inv-1790490737846",
+    "m5_investigation_id": 11,
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "READY",
+    "last_compiled": "2026-09-27T06:32:19.103Z",
+    "lastCompiled": "2026-09-27T06:32:19.103Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T06:32:19.103Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790490737846",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790490737846",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790490737846",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790489391503",
+    "id": "inv-1790489391503",
+    "m5_investigation_id": 10,
+    "title": "Endpoint Triage",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "READY",
+    "last_compiled": "2026-09-27T06:10:23.165Z",
+    "lastCompiled": "2026-09-27T06:10:23.165Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T06:10:23.165Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Endpoint Triage\" {\n    sys = System.info()\n    processes = Process.collect()\n    suspicious = processes.filter(name == \"powershell.exe\" and memory > 500MB)\n    netconns = Network.connections()\n    listeners = Network.listeners()\n    ev = Evidence.preserve(suspicious)\n    Evidence.verify(ev)\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790489391503",
+      "investigation_name": "Endpoint Triage",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790489391503",
+            "investigation_name": "Endpoint Triage",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "sys"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "FILTER_PROCESSES",
+          "params": {
+            "output_variable": "suspicious",
+            "predicate": {
+              "left": {
+                "field": "name",
+                "literal": {
+                  "type": "String",
+                  "value": "powershell.exe"
+                },
+                "op": "==",
+                "type": "Comparison"
+              },
+              "right": {
+                "field": "memory",
+                "literal": {
+                  "raw_unit": "500MB",
+                  "type": "ByteSize",
+                  "value_bytes": 524288000
+                },
+                "op": ">",
+                "type": "Comparison"
+              },
+              "type": "LogicalAnd"
+            },
+            "source_variable": "processes"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "COLLECT_NETWORK_CONNECTIONS",
+          "params": {
+            "output_variable": "netconns"
+          }
+        },
+        {
+          "sequence": 6,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 7,
+          "op": "PRESERVE_EVIDENCE",
+          "params": {
+            "evidence_tag": "ev",
+            "source_variable": "suspicious"
+          }
+        },
+        {
+          "sequence": 8,
+          "op": "VERIFY_EVIDENCE",
+          "params": {
+            "evidence_variable": "ev"
+          }
+        },
+        {
+          "sequence": 9,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790489391503",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790486565890",
+    "id": "inv-1790486565890",
+    "m5_investigation_id": 9,
+    "title": "M5 Integration Test",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "READY",
+    "last_compiled": "2026-09-27T05:22:46.168Z",
+    "lastCompiled": "2026-09-27T05:22:46.168Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T05:22:46.168Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"M5 Integration Test\" {\n    processes = Process.collect()\n    listeners = Network.listeners()\n    system = System.info()\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790486565890",
+      "investigation_name": "M5 Integration Test",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790486565890",
+            "investigation_name": "M5 Integration Test",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "system"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790486565890",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "investigation_id": "inv-1790486225438",
+    "id": "inv-1790486225438",
+    "title": "Dashboard Integration Test",
+    "target": "Windows Fleet",
+    "target_scope": "Windows Fleet",
+    "status": "READY",
+    "last_compiled": "2026-09-27T05:17:05.826Z",
+    "lastCompiled": "2026-09-27T05:17:05.826Z",
+    "grammar_version": "v0.1",
+    "grammarVersion": "Grammar v0.1",
+    "description": "",
+    "created_by": "system",
+    "investigator": "system",
+    "created_at": "2026-09-27T05:17:05.826Z",
+    "created": "27 Sept 2026",
+    "script": "investigation \"Dashboard Integration Test\" {\n    processes = Process.collect()\n    listeners = Network.listeners()\n    system = System.info()\n}",
+    "compiled_ir": {
+      "ir_version": "v0.1.0",
+      "investigation_id": "inv-1790486225438",
+      "investigation_name": "Dashboard Integration Test",
+      "target_scope": "ALL",
+      "instructions": [
+        {
+          "sequence": 1,
+          "op": "INVESTIGATION_BEGIN",
+          "params": {
+            "investigation_id": "inv-1790486225438",
+            "investigation_name": "Dashboard Integration Test",
+            "timestamp_utc": "2026-09-24T13:46:00Z"
+          }
+        },
+        {
+          "sequence": 2,
+          "op": "COLLECT_PROCESSES",
+          "params": {
+            "output_variable": "processes"
+          }
+        },
+        {
+          "sequence": 3,
+          "op": "COLLECT_NETWORK_LISTENERS",
+          "params": {
+            "output_variable": "listeners"
+          }
+        },
+        {
+          "sequence": 4,
+          "op": "COLLECT_SYSTEM_INFO",
+          "params": {
+            "output_variable": "system"
+          }
+        },
+        {
+          "sequence": 5,
+          "op": "INVESTIGATION_END",
+          "params": {
+            "investigation_id": "inv-1790486225438",
+            "status": "SUCCESS"
+          }
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,9 @@
+[package]
+name = "jocky-lexer"
+version = "0.1.0"
+edition = "2021"
+description = "Lexer (tokenizer) for the JOCKY forensic DSL"
+
+[lib]
+name = "jocky_lexer"
+path = "src/lib.rs"

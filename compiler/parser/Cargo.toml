@@ -1,0 +1,17 @@
+[package]
+name = "jocky-parser"
+version = "0.1.0"
+edition = "2021"
+description = "Recursive-descent parser for the JOCKY forensic DSL"
+
+[lib]
+name = "jocky_parser"
+path = "src/lib.rs"
+
+[dependencies]
+jocky-lexer = { path = "../lexer" }
+jocky-ast = { path = "../ast" }
+
+[[test]]
+name = "compiler_compliance"
+path = "../../tests/compiler/frontend_tests.rs"

@@ -1,0 +1,16 @@
+[package]
+name = "jocky-ast"
+version = "0.1.0"
+edition = "2021"
+description = "AST node types for the JOCKY forensic DSL compiler"
+
+[lib]
+name = "jocky_ast"
+path = "src/lib.rs"
+
+[dependencies]
+jocky-lexer = { path = "../lexer" }
+serde = { version = "1.0", features = ["derive"] }
+
+[dev-dependencies]
+serde_json = "1.0"

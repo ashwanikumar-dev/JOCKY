@@ -1,0 +1,8 @@
+investigation "Backend Test" {
+    system = System.info()
+    processes = Process.collect()
+    network = Network.connections()
+    listeners = Network.listeners()
+    evidence = Evidence.preserve(processes)
+    verified = Evidence.verify(evidence)
+}
